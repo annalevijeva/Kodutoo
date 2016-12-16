@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 
 public class LBWindow {
 
-	private static JFrame leaderBoardWindow;
+	private static JFrame lbFrame;
 	private static JButton btnClose;
 	private static JTable table;
 	private static JScrollPane scrollPane;
@@ -27,8 +27,8 @@ public class LBWindow {
 			public void run() {
 				try {
 					LBWindow lbWindow = new LBWindow();
-					lbWindow.leaderBoardWindow.setVisible(true);
-					leaderBoardWindow.setTitle("super stars");
+					lbWindow.lbFrame.setVisible(true);
+					lbFrame.setTitle("super stars");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,30 +43,33 @@ public class LBWindow {
 
 	private void initialize() {
 
-		leaderBoardWindow = new JFrame();
-		leaderBoardWindow.getContentPane().setFont(new Font("Liberation Serif", Font.PLAIN, 20));
-		leaderBoardWindow.getContentPane().setBackground(new Color(185, 255, 250));
-		leaderBoardWindow.setBounds(300, 300, 581, 442);
-		leaderBoardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		leaderBoardWindow.getContentPane().setLayout(null);
+		lbFrame = new JFrame();
+		lbFrame.getContentPane().setFont(new Font("Liberation Serif", Font.PLAIN, 20));
+		lbFrame.getContentPane().setBackground(new Color(185, 255, 250));
+		lbFrame.setBounds(300, 300, 581, 442);
+		lbFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		lbFrame.getContentPane().setLayout(null);
 		
 		btnAddMe = new JButton("Add me!");
 		btnAddMe.setFont(new Font("Liberation Serif", Font.PLAIN, 20));
 		btnAddMe.setBackground(new Color(144, 238, 144));
 		btnAddMe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LeaderBoard.getPlayerData(textField_Name.getText());
+				LeaderBoard.name = textField_Name.getText();
+				LeaderBoard.getPlayerData();
 				textField_Name.setText("");
+				LeaderBoard.updTable();
 				btnAddMe.setEnabled(false);
 			}
 		});
 		btnAddMe.setBounds(181, 359, 126, 25);
-		leaderBoardWindow.getContentPane().add(btnAddMe);
+		lbFrame.getContentPane().add(btnAddMe);
+		LeaderBoard.updTable();
 		
 		textField_Name = new JTextField();
 		textField_Name.setFont(new Font("Liberation Serif", Font.PLAIN, 20));
 		textField_Name.setBounds(69, 358, 99, 25);
-		leaderBoardWindow.getContentPane().add(textField_Name);
+		lbFrame.getContentPane().add(textField_Name);
 		textField_Name.setText("player");
 		textField_Name.setColumns(10);
 		
@@ -74,7 +77,7 @@ public class LBWindow {
 		btnClose.setFont(new Font("Liberation Serif", Font.PLAIN, 20));
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				leaderBoardWindow.dispose();
+				lbFrame.dispose();
 				Game.money.moneyCount = 100;
 				Window.txtMoney.setText(Game.money.moneyCount + " $");
 				Window.Output.setText(Game.rules);
@@ -84,8 +87,9 @@ public class LBWindow {
 		});
 		btnClose.setBackground(new Color(144, 238, 144));
 		btnClose.setBounds(463, 359, 90, 25);
-		leaderBoardWindow.getContentPane().add(btnClose);
+		lbFrame.getContentPane().add(btnClose);
 		
+		LeaderBoard.updTable();
 		table = new JTable(LeaderBoard.rowData, LeaderBoard.columnNames);
 		table.setRowSelectionAllowed(false);
 		table.setBorder(null);
@@ -97,7 +101,7 @@ public class LBWindow {
 
         scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 0, 583, 323);
-        leaderBoardWindow.getContentPane().add(scrollPane);
+        lbFrame.getContentPane().add(scrollPane);
 
 	}
 }

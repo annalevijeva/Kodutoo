@@ -8,29 +8,17 @@ import java.util.ArrayList;
 public class Snippet {
 	
 	public static void main(String[] args) {
-		ArrayList<String> list = lbContent();
-		for (String line : list) {
-			System.out.println(line);
-		}
+		String line = "Player;200 $;21;30%;2016-12-16;";
+		String[] output;
+		
+		output = line.split(";"); // БОЖЕСТВЕННО!!!
+		
+		for (String word : output) {
+			System.out.println(word);
+		} 
 	}
 	
-		
-		//place;name;rates;percent;profit;date
-	
 		static String filePath = "src/CubeCasino/LeaderBoard.txt";
-		
-	//	public static void main(String[] args) {
-	//	ArrayList<String> data = new ArrayList<String>();
-	//	data.add("line 1");
-	//	writeFile(data);
-	//	ArrayList<String> lbTable = readFile();
-	//	System.out.println("");
-	//	for (String line : lbTable) {
-	//		System.out.println(line);
-	//	}
-	//}
-		
-		
 	
 		static ArrayList<String> lbContent() {
 	

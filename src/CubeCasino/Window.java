@@ -139,7 +139,6 @@ public class Window {
 		btnLeaderBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LBWindow lbWindow = new LBWindow();
-//				lbWindow.leaderBoardWindow.setVisible(true);
 				lbWindow.main(null);
 			}
 		});
@@ -153,9 +152,7 @@ public class Window {
 		btnEndGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gameOver();
-//				Game.money.moneyCount = 100;
 				btnLeaderBoard.setEnabled(true);
-//				txtMoney.setText(Game.money.moneyCount + " $");
 			}
 		});
 		btnEndGame.setBackground(new Color(144, 238, 144));
